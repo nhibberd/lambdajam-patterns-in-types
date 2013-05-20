@@ -96,5 +96,6 @@ object WriterT {
   implicit def WriterTMonadTrans[W:Monoid]: MonadTrans[WriterT__[W]#l] = new MonadTrans[WriterT__[W]#l] {
     def liftM[M[_]: Monad, A](ga: M[A]): WriterT[M, W, A] =
       WriterT(Monad[M].map(ga) (a => (Monoid[W].zero, a)))
+      //(run: M[(W, A)])
   }
 }
